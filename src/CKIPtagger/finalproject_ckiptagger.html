@@ -213,6 +213,10 @@ pre code {
 </div>
 
 
+<pre class="r"><code>Sys.setlocale(category = &quot;LC_ALL&quot;, locale = &quot;zh_TW.UTF-8&quot;) # 避免中文亂碼</code></pre>
+<pre><code>## Warning in Sys.setlocale(category = &quot;LC_ALL&quot;, locale = &quot;zh_TW.UTF-8&quot;): OS
+## reports request to set locale to &quot;zh_TW.UTF-8&quot; cannot be honored</code></pre>
+<pre><code>## [1] &quot;&quot;</code></pre>
 <pre class="r"><code>library(readr)
 library(stringr)
 library(dplyr)</code></pre>
@@ -238,6 +242,8 @@ library(highcharter)</code></pre>
 <pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
 ##   method            from
 ##   as.zoo.data.frame zoo</code></pre>
+<pre><code>## Highcharts (www.highcharts.com) is a Highsoft software product which is</code></pre>
+<pre><code>## not free for commercial and Governmental use</code></pre>
 <pre class="r"><code>library(reticulate)
 # Activate a specific conda env in R
 use_condaenv(&quot;r-reticulate&quot;)</code></pre>
@@ -248,15 +254,13 @@ use_condaenv(&quot;r-reticulate&quot;)</code></pre>
 ##                                                                       python
 ## 3                   C:\\Users\\yu\\Anaconda3\\envs\\r-reticulate\\python.exe
 ## 4 C:\\Users\\yu\\AppData\\Local\\r-miniconda\\envs\\r-reticulate\\python.exe</code></pre>
-<pre class="r"><code>#use_condaenv(&quot;r-reticulate&quot;)
-
-## Import ckiptagger module
+<pre class="r"><code># Import ckiptagger module
 ckip &lt;- reticulate::import(module = &quot;ckiptagger&quot;)</code></pre>
 <pre><code>## Warning: Python &#39;C:\Users\yu\Anaconda3\envs\r-reticulate\python.exe&#39; was
 ## requested but &#39;C:/Users/yu/AppData/Local/r-miniconda/envs/r-reticulate/
 ## python.exe&#39; was loaded instead (see reticulate::py_config() for more
 ## information)</code></pre>
-<pre class="r"><code>## Intialize models
+<pre class="r"><code># Intialize models
 ws &lt;- ckip$WS(&quot;C:/Users/yu/Documents/data&quot;)
 pos &lt;- ckip$POS(&quot;C:/Users/yu/Documents/data&quot;)
 # system.time((ner &lt;- ckip$NER(&quot;C:/Users/yu/Documents/data&quot;)))</code></pre>
@@ -420,8 +424,8 @@ knitr::include_graphics(&quot;C:/Users/yu/OneDrive/Desktop/R Lab Note/png/109_1_
     hc_add_series(name = &quot;Frequency&quot;, data = df3$n) %&gt;%
     hc_title(text = &quot;109_1詞彙分布圖&quot;)
 graph_109_1</code></pre>
-<div id="htmlwidget-b1f16af1f8254cd2d0ab" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b1f16af1f8254cd2d0ab">{"x":{"hc_opts":{"chart":{"reflow":true,"type":"bar"},"title":{"text":"109_1<U+8A5E><U+5F59><U+5206><U+5E03><U+5716>"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"categories":["增設","空間","宿舍","停車場","學生","教學館","校","自行車","人","台大","同學","大便","娛樂","學生會","成績","獎金","生治會","補考","設施","配合","馬桶","使用率","修習","價格","入口","博雅","危害","參與","台大人","地方","壓力","學期","室","平台","廁所","影片","情形","意願","投資","校園","業者","疫情","科目","者","設置","車子","車速","開放","開設","閘門","附近","頻率","鼠","事故","交流版","人際","人類","付出","住宿生","使用","侵犯","停車格","偵測","先修","公喪假","出","出口","出清","出租人","出題費","刷若","加強","勞力","勞動力","勞務","台北","合修","地區","基金","塞滿","大型","大道","宗教","家庭","家教","小便斗","工程","平面","年度","幹部","廣納","弄髒","影響","意外","愛情","成立","手麻腳麻","承租人","接洽","控管","推出","提升","提高","擋修","收入","改","改善","教導","旅館","校門","椰林","標準","機制","檢舉","水準","洗滌","活動","浴室","清理","測量站","測驗","溜滑梯","溫泉","滿意度","爭取","物品","犯人","狀況","獎勵金","瑜伽用","環境","用餐區","疑慮","盈餘","看過","社科圖","祈禱室","窗","系","系統","經濟","線上","總幹事","繳交","義工","老師","老鼠","舍胞","舒緩","舟山路","處","蟲","補考費","裝置","規劃","觀看","訂定","計算","設備","試辦","課業","課程","調劑","警告","財務部","財源","費用","身心","車牌","車輛","辨識","通過","遊樂園","選舉","酒吧","釋放","間距","闢","除","電子","需求","食安","馬桶蓋","騎乘","體溫","高手","鼠患","鼠患蟲患"]},"series":[{"data":[8,8,6,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"name":"Frequency"}]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b66e708a8a8c0d9f1cb4" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b66e708a8a8c0d9f1cb4">{"x":{"hc_opts":{"chart":{"reflow":true,"type":"bar"},"title":{"text":"109_1<U+8A5E><U+5F59><U+5206><U+5E03><U+5716>"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"categories":["增設","空間","宿舍","停車場","學生","教學館","校","自行車","人","台大","同學","大便","娛樂","學生會","成績","獎金","生治會","補考","設施","配合","馬桶","使用率","修習","價格","入口","博雅","危害","參與","台大人","地方","壓力","學期","室","平台","廁所","影片","情形","意願","投資","校園","業者","疫情","科目","者","設置","車子","車速","開放","開設","閘門","附近","頻率","鼠","事故","交流版","人際","人類","付出","住宿生","使用","侵犯","停車格","偵測","先修","公喪假","出","出口","出清","出租人","出題費","刷若","加強","勞力","勞動力","勞務","台北","合修","地區","基金","塞滿","大型","大道","宗教","家庭","家教","小便斗","工程","平面","年度","幹部","廣納","弄髒","影響","意外","愛情","成立","手麻腳麻","承租人","接洽","控管","推出","提升","提高","擋修","收入","改","改善","教導","旅館","校門","椰林","標準","機制","檢舉","水準","洗滌","活動","浴室","清理","測量站","測驗","溜滑梯","溫泉","滿意度","爭取","物品","犯人","狀況","獎勵金","瑜伽用","環境","用餐區","疑慮","盈餘","看過","社科圖","祈禱室","窗","系","系統","經濟","線上","總幹事","繳交","義工","老師","老鼠","舍胞","舒緩","舟山路","處","蟲","補考費","裝置","規劃","觀看","訂定","計算","設備","試辦","課業","課程","調劑","警告","財務部","財源","費用","身心","車牌","車輛","辨識","通過","遊樂園","選舉","酒吧","釋放","間距","闢","除","電子","需求","食安","馬桶蓋","騎乘","體溫","高手","鼠患","鼠患蟲患"]},"series":[{"data":[8,8,6,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"name":"Frequency"}]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="分析97109年各年詞頻與詞彙分布" class="section level2">
@@ -451,8 +455,7 @@ result &lt;- function(x){
     group_by(unlist_words) %&gt;%
     summarise(n = n()) %&gt;%
     arrange(desc(n))
-    View(df3)
-
+    
     #抽取前10個詞彙畫成圖
     graph &lt;- highchart() %&gt;%
     hc_chart(type = &quot;bar&quot;) %&gt;%
@@ -576,10 +579,10 @@ knitr::include_graphics(&quot;C:/Users/yu/OneDrive/Desktop/R Lab Note/png/top10_
     hc_chart(type = &quot;bar&quot;) %&gt;%
     hc_xAxis(categories = top10_freq_by_year_df$word) %&gt;%
     hc_add_series(name = &quot;Frequency&quot;, data = top10_freq_by_year_df$n) %&gt;%
-    hc_title(text = &quot;近12年各年排名前10詞彙分布圖&quot;)
+    hc_title(text = paste0(&quot;近&quot;,13 ,&quot;年各年排名前&quot;, 10, &quot;詞彙分布圖&quot;))
 top10_freq_by_year_graph</code></pre>
-<div id="htmlwidget-cc76adae9f61dfb118b8" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-cc76adae9f61dfb118b8">{"x":{"hc_opts":{"chart":{"reflow":true,"type":"bar"},"title":{"text":"<U+8FD1>12<U+5E74><U+5404><U+5E74><U+6392><U+540D><U+524D>10<U+8A5E><U+5F59><U+5206><U+5E03><U+5716>"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"categories":["學生","校園","學生會","校","活動","空間","課程","同學","推動","爭取","社團","台大","場地","性別","使用","建立","社會","臺大","舉辦","議題","資訊","人","做完","制度","台大人","國際","大學","媒體","宿舍","想像","意見","政見","文化","曲","會議","會長","機會","深度","設立","詮釋","語言","資源","進行","領域"]},"series":[{"data":[13,12,8,8,8,6,6,5,5,5,5,4,4,4,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"name":"Frequency"}]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-91cc5c1992f2dd02b2ef" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-91cc5c1992f2dd02b2ef">{"x":{"hc_opts":{"chart":{"reflow":true,"type":"bar"},"title":{"text":"<U+8FD1>13<U+5E74><U+5404><U+5E74><U+6392><U+540D><U+524D>10<U+8A5E><U+5F59><U+5206><U+5E03><U+5716>"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"categories":["學生","校園","學生會","校","活動","空間","課程","同學","推動","爭取","社團","台大","場地","性別","使用","建立","社會","臺大","舉辦","議題","資訊","人","做完","制度","台大人","國際","大學","媒體","宿舍","想像","意見","政見","文化","曲","會議","會長","機會","深度","設立","詮釋","語言","資源","進行","領域"]},"series":[{"data":[13,12,8,8,8,6,6,5,5,5,5,4,4,4,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"name":"Frequency"}]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
