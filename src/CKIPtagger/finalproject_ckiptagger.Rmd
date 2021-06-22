@@ -1,0 +1,268 @@
+---
+title: "期末專題_使用ckiptagger斷詞系統製作詞頻表"
+author: "匿名花栗鼠:B08 陳品睿 B08b02061 陳亦萲 B09303105 許庭瑜 B09303065 賴迎曦"
+date: "6/16/2021"
+output: html_document
+---
+
+
+```{r}
+Sys.setlocale(category = "LC_ALL", locale = "zh_TW.UTF-8") # 避免中文亂碼
+library(readr)
+library(stringr)
+library(dplyr)
+library(tidytext)
+library(tidyverse)
+library(tibble)
+library(highcharter)
+library(reticulate)
+# Activate a specific conda env in R
+use_condaenv("r-reticulate")
+
+# Import ckiptagger module
+ckip <- reticulate::import(module = "ckiptagger")
+
+# Intialize models
+ws <- ckip$WS("C:/Users/yu/Documents/data")
+pos <- ckip$POS("C:/Users/yu/Documents/data")
+# system.time((ner <- ckip$NER("C:/Users/yu/Documents/data")))
+
+```
+## 以109年1號參選人為例進行初步分析
+### 讀檔、進行初步斷詞與獲得其相對應的詞性
+```{r}
+t109_1 <- read_file("C:/Users/yu/OneDrive/Desktop/R Lab Note/Politics_txt/109_1.txt")
+t109_1 <- str_split(t109_1, "\r\n")
+t109_1 <- as.vector(unlist(t109_1))
+words <- ws(t109_1)
+head(words)
+pos_words <- pos(words)
+head(pos_words)
+```
+
+### 製作初步斷詞及其對應詞性的dataframe
+```{r}
+df <- tibble(unlist_words = unlist(words), unlist_pos = unlist(pos_words))
+length(df$unlist_words)
+```
+#### 前10列結果:
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/109_1_df.png")
+```
+
+
+### 抽取詞性為普通名詞(Na)、專有名詞(Nb)、地方詞(Nc)、動作及物動詞(VC)的詞彙
+```{r}
+df2 <- filter(df, (unlist_pos == "Na" )| (unlist_pos == "Nb" )| (unlist_pos ==  "Nc")| (unlist_pos ==  "VC"))
+length(df2$unlist_words)
+```
+#### 前10列結果:
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/109_1_df2.png")
+```
+
+### 製作詞頻表
+```{r}
+df3 <- df2 %>%
+    group_by(unlist_words) %>%
+    summarise(n = n()) %>%
+    arrange(desc(n))
+```
+#### 前13列結果:
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/109_1_df3.png")
+```
+
+### 比較表1、表2與表3前10列的詞:
+```{r}
+df4 <- tibble(df = head(df$unlist_words, 10L), df2 = head(df2$unlist_words, 10L), df3 = head(df3$unlist_words, 10L))
+
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/109_1_df4.png")
+```
+
+
+
+### 繪製詞彙分布圖
+```{r}
+graph_109_1 <- highchart() %>%
+    hc_chart(type = "bar") %>%
+    hc_xAxis(categories = df3$unlist_words) %>%
+    hc_add_series(name = "Frequency", data = df3$n) %>%
+    hc_title(text = "109_1詞彙分布圖")
+graph_109_1
+```
+
+## 分析97~109年各年詞頻與詞彙分布
+###輸入年份即可輸出結果的函數
+```{r}
+t <- function(x){
+    t <- read_file(paste0("C:/Users/yu/OneDrive/Desktop/R Lab Note/Politics_txt_by_years/", x, ".txt"))
+    t <- unlist(str_split(t, "\r\n"))
+    t <- str_squish(t)
+    t
+}
+word <- function(x){
+    word <- ws(t(x))
+    word
+}
+pos_word <- function(x){
+    pos_word <- pos(word(x))
+    pos_word
+}
+
+#結果
+
+result <- function(x){
+    df <- tibble(unlist_words = unlist(word(x)), unlist_pos = unlist(pos_word(x)))
+    df2 <- filter(df, (unlist_pos == "Na" )| (unlist_pos == "Nb" )| (unlist_pos ==  "Nc")| (unlist_pos ==  "VC"))
+    df3 <- df2 %>%
+    group_by(unlist_words) %>%
+    summarise(n = n()) %>%
+    arrange(desc(n))
+    
+    #抽取前10個詞彙畫成圖
+    graph <- highchart() %>%
+    hc_chart(type = "bar") %>%
+    hc_xAxis(categories = head(df3$unlist_words, 10L)) %>%
+    hc_add_series(name = "Frequency", data = head(df3$n, 10L)) %>%
+    hc_title(text = paste0(x,"年詞彙分布圖"))
+    graph
+}
+
+```
+### 各年結果
+97年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/97_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/97_graph.png")
+```
+
+
+98年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/98_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/98_graph.png")
+```
+
+99年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/99_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/99_graph.png")
+```
+
+100年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/100_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/100_graph.png")
+```
+
+
+101年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/101_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/101_graph.png")
+```
+
+102年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/102_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/102_graph.png")
+```
+
+103年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/103_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/103_graph.png")
+```
+
+104年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/104_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/104_graph.png")
+```
+
+105年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/105_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/105_graph.png")
+```
+
+106年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/106_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/106_graph.png")
+```
+
+107年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/107_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/107_graph.png")
+```
+
+108年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/108_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/108_graph.png")
+```
+
+109年
+```{r}
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/109_df.png")
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/109_graph.png")
+```
+
+### 對比各年出現次數最多的前10詞彙
+```{r}
+top10 <- function(x){
+    df <- tibble(unlist_words = unlist(word(x)), unlist_pos = unlist(pos_word(x)))
+    df2 <- filter(df, (unlist_pos == "Na" )| (unlist_pos == "Nb" )| (unlist_pos ==  "Nc")| (unlist_pos ==  "VC"))
+    df3 <- df2 %>%
+        group_by(unlist_words) %>%
+        summarise(n = n()) %>%
+        arrange(desc(n))
+    head(df3$unlist_words, 10L)
+}
+y97 <- top10(97)
+y98 <- top10(98)
+y99 <- top10(99)
+y100 <- top10(100)
+y101 <- top10(101)
+y102 <- top10(102)
+y103 <- top10(103)
+y104 <- top10(104)
+y105 <- top10(105)
+y106 <- top10(106)
+y107 <- top10(107)
+y108 <- top10(108)
+y109 <- top10(109)
+compare_by_year_df <- tibble(y97 = y97, y98 = y98, y99 = y99, y100 = y100, y101 = y101, y102 = y102, y103 = y103, y104 = y104, y105 = y105, y106 = y106, y107 = y107, y108 = y108, y109 = y109)
+
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/top10_compare_by_year_df.png")
+
+```
+
+
+
+### 97~109年各年前10詞彙出現年數統計
+#### 表格
+```{r}
+all_top10 <- c(y97, y98, y99, y100, y101, y102, y103, y104, y105, y106, y107, y108, y109)
+top10_freq_by_year_df <- tibble(word = all_top10) %>%
+    group_by(word) %>%
+    summarise(n = n()) %>%
+    arrange(desc(n))
+knitr::include_graphics("C:/Users/yu/OneDrive/Desktop/R Lab Note/png/top10_freq_by_year_df.png")
+```
+
+
+#### 長條圖
+```{r}
+top10_freq_by_year_graph <- highchart() %>%
+    hc_chart(type = "bar") %>%
+    hc_xAxis(categories = top10_freq_by_year_df$word) %>%
+    hc_add_series(name = "Frequency", data = top10_freq_by_year_df$n) %>%
+    hc_title(text = paste0("近",13 ,"年各年排名前", 10, "詞彙分布圖"))
+top10_freq_by_year_graph
+```
+
+
