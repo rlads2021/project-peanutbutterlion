@@ -1,7 +1,7 @@
 ---
 author: "B08608054 陳品睿 B08b02061 陳亦萲 B09303105 許庭瑜 B09303065 賴迎曦"
 title: "台大學生都在在想什麼？— 試析台大學生共識議題之轉變"
-output:
+output: 
   html_document:
     number_sections: yes
     highlight: tango
@@ -36,7 +36,7 @@ knitr::opts_chunk$set(echo = TRUE,comment = '#>',error=TRUE, results = 'hold', o
 
 由於96學年度以前的學生會會長候選人政見不曾有人整理，因此我們只蒐集`97至109學年度`共13年、`33`筆資料，總字數為`67827`字。
 
- 分析方法
+分析方法
 ==================
 
 起初，我們使用了課堂上學到的斷詞、製作詞頻表的技巧來分析這些政見，；然而，停用詞典的效果比我們預期的低許多、英文政見影響了結果、各種「的、與、和」等介系詞和連接詞也干擾了分析，因此決定使用CKIPtagger將政見標註詞性，以及加入了Textrank透過關鍵句來展示結果，儘管上面的問題有獲得解決，但是每個方法都各有利弊。下方將詳細說明我們的程式碼，並比較每個年度用各種分析方法的結果：
@@ -65,7 +65,7 @@ library(highcharter)
 * 說明：透過title[輸入數字]，可讀取某一年所有政見文章
     
 ```{r}
-fps <- list.files("/Users/sharon/Desktop/science_data/Politics_txt_by_years", full.names = T)
+fps <- list.files("./Politics_txt_by_years", full.names = T)
 
 title <- vector()
 for (i in seq_along(fps)) {
@@ -79,7 +79,7 @@ for (i in seq_along(fps)) {
     
 ```{r}
 #在外部構造一個jieba分詞器 
-seg <- worker(user = "/Users/sharon/Desktop/science_data/user_dict.txt", stop_word = "/Users/sharon/Desktop/science_data//stop_word.txt")
+seg <- worker(user = "./user_dict.txt", stop_word = "./stop_word.txt")
 
 #candidate函數
 candidate <- function(x) {
@@ -388,7 +388,7 @@ sentences(12)
 ## 這些難題經過了長時間的討論後，大家關注的面向有沒有改變？
 * 我們再將上面的議題，重新按時間順序排列後，會發現從學生會長提出的政見中，議題有這樣的演變關係。值得關注的是，在104年時，其實學生會長有進行補選，而105年中**選舉制度改善**為分析該年的重點議題，可以預測此方法，應該還是有一些可信性。
 
-(把這個改成時間軸的圖)
+
 近期：參選預算(109,106)
    性別友善(108,104,103)
    技術交流(跨領域、跨國際)(102) 兩個議題
