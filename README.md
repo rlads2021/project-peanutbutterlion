@@ -15,5 +15,4 @@ G09 *ㄨ匿名花栗鼠ㄨ*
 - [投影片](./G09_slides.pdf)
 - [書面報告](./G09_report.pdf)  
 - [專案網站](./G09_website.html)
-- [Shiny App](#若沒有可以拿掉)
 

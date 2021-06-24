@@ -3,12 +3,12 @@
 我們與臺大學生會選委會聯繫過後，對方表示未曾有人整理歷年來之選舉政見，因此我們的資料出自二處：  
    粉專爬文(104-109學年度): 自臺大學生會選委會的粉專，找出每年度「選舉公報」中之學生會會長候選人的政見，將其儲存成`.txt`文字檔。  
    查找PTT(97-103學年度): 這七年的政見皆有人整理放在PTT網站中，同樣儲存成`.txt`文字檔。
-   - `Politics_txt/`：各檔案為每個候選人的政見
-   - `Politics_txt_by_years/`：各檔案為每年度所有候選人的政見
+   - `science_data/Politics_txt/`：[各檔案為每個候選人的政見](./science_data/Politics_txt/)
+   - `science_data/Politics_txt_by_years/`：[各檔案為每年度所有候選人的政見](./science_data/Politics_txt_by_years/)
    
 ## 使用者字典和停用詞字典
-- [使用者字典](./user_dict.txt)
-- [停用詞字典](./stop_word.txt)
+- [使用者字典](./science_data/user_dict.txt)
+- [停用詞字典](./science_data/stop_word.txt)
 
 ## jiebaR
 - [jiebaR原始檔HTML檔](./jiebaR.html)
