@@ -18,7 +18,6 @@
 資料夾`CKIPtagger/`裡為使用CKIP斷詞系統做的文本分析，有`.Rmd`和`.html`，而`ckiptagger_result_png/`則是我們在將`.Rmd`輸出成`.html`時，因為我們載入模型檔的緣故使得RStudio跑得過慢，容易當掉，因此我們把`result(年份)`在`Rconsole`執行，並把結果截圖下來，儲存在`ckiptagger_result_png/`這個資料夾中。另外由於CKIPtagger的模型檔案太大，於是我們採用下方超連結的方式：
 - [CKIPtagger模型檔](https://drive.google.com/drive/folders/105IKCb88evUyLKlLondvDBoh7Dy_I1tm)
 - [原始碼HTML檔](./CKIPtagger/finalproject_ckiptagger.html)
-- [原始碼Rmd檔](./CKIPtagger/finalproject_ckiptagger.Rmd)
 
 ## TextRank
 - [原始碼HTML檔](./textrank.html)
